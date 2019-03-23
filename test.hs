@@ -68,25 +68,14 @@ split xs =reverse (splitFirst ((length xs)-1) xs)
 
 
 --question 5 here ###############################
-exprs :: [Int] -> [Expr]
+--exprs :: [Int] -> [Expr]
 
 --list_to_expr [x] = Vs
 
-exprs [x] = (Val x):[]
-exprs [y,x] = (App Add (Val y) (Val x)):(App Mul (Val y) (Val x)):[]
-exprs (y:x:xs) = (exprs [y,x]) ++ (exprs xs)
+exprs1 [x] = (Val x)
+exprs1 [y,x] = App Add (Val y) (Val x)
+exprs1 (x:xs) = App Add (Val x) (exprs1 xs)
 
+exprs xs = [App Add (exprs1 (fst lst)) (exprs1 (snd lst))|lst<- (split xs)]
 
 --question 6 here #######################################################
-
-
-
-
-
-
-
-
-
-
-
-
